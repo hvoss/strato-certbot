@@ -29,24 +29,24 @@ domains = [
     ['domain-g.de', '1']
 ]
 
-print()
+print("")
 print("My bad pattern")
 for domain in domains:
     result = re.search(
-        r'<a\s+class="customer-link"\s+href="[^"]*cID=(?P<cID>\d+)[^"]*">\s*'
-        r'<span\s+class="jss_own_packagename">\s*'
+        r'<a class="customer-link" href="[^"]*cID=(?P<cID>\d+)[^"]*">\s*'
+        r'<span class="jss_own_packagename">'
         + domain[0].replace('.', r'\.'),
         open("projectPage.html","r").read(),
         re.DOTALL
         )
     print("check %s is in project %s: %s" % (domain[0], domain[1], result != None and result.group('cID') == domain[1]))
 
-print()
+print("")
 print("Actual pattern:")
 for domain in domains:
     result = re.search(
-        r'<div\s+class="cep_product">\s*<a\s+class="customer-link"\s+href='
-        r'"[^"]*cID=(?P<cID>\d+).*<span[^>]*>[^\/]*'
+        r'<div class="cep_product">\s*<a class="customer-link" href='
+        r'"[^"]*cID=(?P<cID>\d+).*<span [^>]*>[^\/]*'
         + domain[0].replace('.', r'\.'),
         open("projectPage.html","r").read(),
         re.DOTALL
